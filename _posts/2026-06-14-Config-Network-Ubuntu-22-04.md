@@ -2,7 +2,9 @@
 
 #### DHCP
 
-```/etc/netplan/01-netcfg.yaml
+```
+path /etc/netplan/01-netcfg.yaml
+
 network:
   version: 2
   renderer: networkd
@@ -13,7 +15,9 @@ network:
 
 #### Static
 
-```/etc/netplan/01-netcfg.yaml
+```
+path /etc/netplan/01-netcfg.yaml
+
 network:
   version: 2
   renderer: networkd
