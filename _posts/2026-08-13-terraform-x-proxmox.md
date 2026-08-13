@@ -45,3 +45,25 @@ Saat mengeksekusi terraform plan akan muncul tampilan perubahan apa saja yang ak
 `Apply` : tahap dimana terraform menerapkan perubahan yang disetujui setelah membaca plan yang diberikan.
 
 Berikut merupakan contoh struktur directory dari terraform.
+
+#### Struktur Directory :
+
+---
+terraform-proxmox(root)/
+
+main.tf
+providers.tf
+versions.tf
+variables.tf
+cred.auto.tfvars
+outputs.tf
+
+/module/
+  |----	vm/
+	      main.tf
+	      versions.tf
+	      variables.tf
+	      outputs.tf
+---
+
+Pada struktur directory di atas terdapat root directory, disini dengan nama terraform-proxmox yang di dalamnya terdapat file – file .tf (main, providers, versions, variables, outputs) , file credentials dan module direktori. 
