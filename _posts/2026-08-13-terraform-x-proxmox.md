@@ -146,7 +146,7 @@ output "hostname" {
 Gambar 3
 {:style="text-align: center;"}
 
-Pada gambar 3 terlihat di outputs.tf module value yang digunakan adalah nama resources yang dijalankan di main.tf module direktori sedangkan di outputs.tf root yang digunakan adalah value yang dioper dari outputs.tf module dengan format module.<nama_module>.<variable_output>.
+Pada gambar 3 terlihat di outputs.tf module value yang digunakan adalah nama resources yang dijalankan di main.tf module direktori sedangkan di outputs.tf root yang digunakan adalah value yang dioper dari outputs.tf module dengan format `module.<nama_module>.<variable_output>`.
 
 Pada struktur directory di atas, selain dari 3 file yang telah dibahas (main.tf, variables.tf, dan outputs.tf) ada juga versions.tf yang digunakan untuk define providers dan versinya yang digunakan. Version ini akan terasa penting jika digunakan di real production dari pada di simulasi atau devel karena akan membatasi agar tidak melakukan update / upgrade sehingga mengurangi resiko bug / error tiba – tiba.
 
