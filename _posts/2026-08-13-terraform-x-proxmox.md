@@ -87,3 +87,10 @@ resource "proxmox_vm_qemu" "servers" {
     bootdisk = "scsi0"
     ......
 ```
+                                              Gambar 1
+
+Pada gambar 1 diperlihatkan bahwa parameter atau konfigurasi yang akan disesuaikan setiap pembuatan VM baru adalah parameter yang valuenya diisi dengan nama variable yang mana nilainya akan didapatkan dari root main.tf nantinya, sedangkan untuk parameter yang valuenya akan hampir selalu tetap seperti agent dll, untuk memudahkan penulisan dan tidak selalu mengulang menulis code yang sama dibuat menjadi module. 
+
+Module memudahkan untuk menggunakan ulang / reuse code yang sering digunakan. Pada infrastruktur dengan kompleksitas yang tinggi dan skala besar, sangat dibutuhkan penggunaan module atau pengelompokkan komponen – komponen agar lebih mudah untuk digunakan lagi.
+
+Selanjutnya, dari mana nama variable yang digunakan pada main.tf pada gambar 1 berasal atau didefine. Jawabannya adalah dari variables.tf, berikut contoh isi dari variables.tf :
