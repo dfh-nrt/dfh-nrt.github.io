@@ -95,3 +95,82 @@ Pada gambar 1 diperlihatkan bahwa parameter atau konfigurasi yang akan disesuaik
 Module memudahkan untuk menggunakan ulang / reuse code yang sering digunakan. Pada infrastruktur dengan kompleksitas yang tinggi dan skala besar, sangat dibutuhkan penggunaan module atau pengelompokkan komponen – komponen agar lebih mudah untuk digunakan lagi.
 
 Selanjutnya, dari mana nama variable yang digunakan pada main.tf pada gambar 1 berasal atau didefine. Jawabannya adalah dari variables.tf, berikut contoh isi dari variables.tf :
+
+```
+# module variables.tf
+variable "vm_name"{
+    type = string
+}
+
+variable "vm_id"{
+    type = number
+}
+
+variable "vm_memory"{
+    type = number
+}
+.....
+```
+Gambar 2
+{:style="text-align: center;"}
+
+Pada gambar 2 ditunjukkan define variable dilakukan dengan memberi nama variable pada bagian setelah variable dan type variable yang sesuai dengan ketentuan parameter yang akan diisi dengan variable tersebut. Contohnya jika ingin mengisi memory yang parameternya secara default diisi angka maka akan memunculkan error unexpected jika diisi oleh string dsb.
+
+Sekarang ada permasalah jika menggunakan module yaitu root akan menganggap modul sebagai black box, yang artinya root direktori tidak dapat secara langsung mengambil informasi dari VM yang parameternya berada di module. Disinilah digunakan outputs.tf untuk mengoper informasi yang dibutuhkan tersebut, berikut isi file outputs.tf :
+
+```
+# output tf module
+output "vm_id" {
+    value = proxmox_vm_qemu.servers.vmid
+}
+output "vm_ip" {
+    value = proxmox_vm_qemu.servers.default_ipv4_address
+}
+output "vm_hostname" {
+    value = proxmox_vm_qemu.servers.name
+....
+
+# output tf root
+output "vm_id" {
+    value = module.vm.vm_id
+}
+
+output "ip_address" {
+    value = module.vm.vm_ip
+}
+
+output "hostname" {
+    value = module.vm.vm_hostname
+....
+```
+Gambar 3
+{:style="text-align: center;"}
+
+Pada gambar 3 terlihat di outputs.tf module value yang digunakan adalah nama resources yang dijalankan di main.tf module direktori sedangkan di outputs.tf root yang digunakan adalah value yang dioper dari outputs.tf module dengan format module.<nama_module>.<variable_output>.
+
+Pada struktur directory di atas, selain dari 3 file yang telah dibahas (main.tf, variables.tf, dan outputs.tf) ada juga versions.tf yang digunakan untuk define providers dan versinya yang digunakan. Version ini akan terasa penting jika digunakan di real production dari pada di simulasi atau devel karena akan membatasi agar tidak melakukan update / upgrade sehingga mengurangi resiko bug / error tiba – tiba.
+
+Selanjutnya, jika diperhatikan pada struktur direktori antara root direktori dengan modul direktori file – file tf memiliki nama yang sama satu sama lain. Hal tersebut karena memang fungsinya sama hanya scopenya yang berbeda dan agar memudahkan. Maka dari itu, perbedaan yang terlihat dari struktur direktori di atas adalah pada file providers.tf dan cred.auto.tfvars.
+
+File providers.tf untuk struktur direktori di atas yang menggunakan proxmox berisikan informasi untuk berkomunikasi dengan proxmox di sini menggunakan token dan secret yang dikonfigurasi atau didapat dari proxmox sedangkan cred.auto.tfvars merupakan file yang digunakan untuk menyimpan credential yang digunakan di providers.tf. Berikut contoh providers.tf.
+
+```
+provider "proxmox" {
+  pm_api_url = var.proxmox_url
+  # Pro Tip : Never store your creds on Terraform Configuration files 
+  # that can or may be commited to VCS 
+  # Pro Tip : Use either Env Variables or git-ignored *.auto.tfvars files
+  pm_api_token_id     = var.proxmox_token_id
+  pm_api_token_secret = var.proxmox_token_secret
+  # Disable TLS (not recommanded for Production envirement)
+  pm_tls_insecure = true
+  # Define number of parrallel tasks that proxmox can handle.
+  pm_parallel     = 10
+  pm_minimum_permission_check = false
+}
+```
+Gambar 4
+{:style="text-align: center;"}
+
+Pada gambar 4 ditunjukkan parameter yang dikonfigurasi untuk dapat berkomunikasi dengan proxmox dan variable yang didefine di variables.tf root dengan value dari cred.auto.tfvars file. Penggunaan file cred.auto.tfvars penting untuk menghindari file dengan harcode credential agar tidak terekspos ke public dan agar mudah meng-ignore file tersebut untuk version controlling.
+
