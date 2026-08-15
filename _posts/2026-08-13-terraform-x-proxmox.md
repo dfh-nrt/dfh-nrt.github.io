@@ -48,7 +48,7 @@ Berikut merupakan contoh struktur directory dari terraform.
 
 #### Struktur Directory :
 
----
+```
 terraform-proxmox(root)/
 
 main.tf
@@ -64,6 +64,6 @@ outputs.tf
 	      versions.tf
 	      variables.tf
 	      outputs.tf
----
+```
 
 Pada struktur directory di atas terdapat root directory, disini dengan nama terraform-proxmox yang di dalamnya terdapat file – file .tf (main, providers, versions, variables, outputs) , file credentials dan module direktori. 
