@@ -66,4 +66,24 @@ outputs.tf
 	      outputs.tf
 ```
 
-Pada struktur directory di atas terdapat root directory, disini dengan nama terraform-proxmox yang di dalamnya terdapat file – file .tf (main, providers, versions, variables, outputs) , file credentials dan module direktori. 
+Pada struktur directory di atas terdapat root directory, disini dengan nama terraform-proxmox yang di dalamnya terdapat file – file .tf (main, providers, versions, variables, outputs) , file credentials dan module direktori.
+
+Sebelumnya sudah diberitahukan kalau module merupakan salah satu core konsep dari terraform yang pada prinsipnya mirip dengan function di pemograman. Pada struktur direktori terraform di atas module berisikan direktori vm yang akan difungsikan sejenis template untuk menyederhakan parameter pembuatan VM di main.tf di root direktori. Berikut merupakan sedikit isi main.tf di vm direktori dalam module :
+
+```
+# module main.tf create vm
+resource "proxmox_vm_qemu" "servers" {
+    name = var.vm_name
+    vmid = var.vm_id
+    memory = var.vm_memory
+    cpu {
+        cores = var.vm_core
+    }
+
+    target_node = "proxmox"
+    agent = 1
+    clone = "ubuntu-template"
+    scsihw = "virtio-scsi-pci"
+    bootdisk = "scsi0"
+    ......
+```
