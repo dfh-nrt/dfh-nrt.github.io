@@ -87,7 +87,8 @@ resource "proxmox_vm_qemu" "servers" {
     bootdisk = "scsi0"
     ......
 ```
-	Gambar 1
+{:style="text-align: center;"}
+Gambar 1
 
 Pada gambar 1 diperlihatkan bahwa parameter atau konfigurasi yang akan disesuaikan setiap pembuatan VM baru adalah parameter yang valuenya diisi dengan nama variable yang mana nilainya akan didapatkan dari root main.tf nantinya, sedangkan untuk parameter yang valuenya akan hampir selalu tetap seperti agent dll, untuk memudahkan penulisan dan tidak selalu mengulang menulis code yang sama dibuat menjadi module. 
 
