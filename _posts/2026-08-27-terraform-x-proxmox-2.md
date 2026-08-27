@@ -2,4 +2,4 @@
 
 #### Terraform
 
-![My helpful screenshot](/assets/topologi_i.png)
+![Topologi I](/assets/topologi_i.png)
