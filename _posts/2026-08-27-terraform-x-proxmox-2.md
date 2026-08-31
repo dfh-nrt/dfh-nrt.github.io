@@ -13,4 +13,11 @@ Berbeda dengan count yang menggunakan penomoran, for_each menggunakan metode key
 ### Dynamic Block
 
 Merupakan salah satu cara untuk merubah data bertipe list ke map. Selain menggunakan dynamic block untuk merubah list ke map bisa juga dengan menggunakan for atau tosset untuk merubah list ke set.
+
 Pada dasarnya dynamic block digunakan untuk menyederhanakan perulangan nested block agar code menjadi lebih clean dan sederhana.
+
+---
+
+Gambar di atas merupakan skema yang akan saya gunakan pada percobaan kali ini
+
+you can [get the PDF](/assets/for_each.pdf)
