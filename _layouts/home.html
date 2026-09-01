@@ -10,6 +10,7 @@ layout: default
       {% for post in site.posts %}
       <li>
         <h3>
+            {{ post.date | date: "%b %-d, %Y" }}
           <a class="post-link" href="{{ post.url | relative_url }}">
             {{ post.title | escape }}
           </a>
