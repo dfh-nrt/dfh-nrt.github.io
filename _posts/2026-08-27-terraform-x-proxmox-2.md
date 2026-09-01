@@ -2,8 +2,8 @@
 title: "Terraform X Proxmox : VM GW, Devel and Production"
 date: 2026-08-27
 tags:
-  - Terraform
-  - Proxmox
+  - Infrastructure as Code
+  - Virtualisasi
 ---
 
 ## Terraform X Proxmox : VM GW, Devel and Production

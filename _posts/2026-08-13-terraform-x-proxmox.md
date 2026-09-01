@@ -1,3 +1,11 @@
+---
+title: "Terraform X Proxmox : Simple Main TF dengan Struktur Directory"
+date: 2026-08-13
+tags:
+  - Virtualisasi
+  - Infrastructure as Code
+---
+
 ## Terraform X Proxmox : Simple Main TF dengan Struktur Directory
 
 #### Terraform

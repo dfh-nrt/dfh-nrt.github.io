@@ -1,3 +1,11 @@
+---
+title: "Config Network Ubuntu 22.04"
+date: 2026-06-14
+tags:
+  - Networking
+  - Operating System
+---
+
 ## Config Network Ubuntu 22.04
 
 #### DHCP
